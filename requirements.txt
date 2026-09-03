@@ -1,0 +1,14 @@
+# Retrieval
+sentence-transformers>=3.0    # embedding models (default: BAAI/bge-small-en-v1.5)
+chromadb>=0.5                 # persistent local vector store
+pymupdf>=1.24                 # PDF -> text, page by page
+
+# Generation (local backend; --backend ollama needs no extra package,
+# --backend openai additionally needs `pip install openai`)
+transformers>=4.44
+accelerate>=0.33
+torch>=2.2
+
+# Interface
+gradio>=4.0
+numpy>=1.26

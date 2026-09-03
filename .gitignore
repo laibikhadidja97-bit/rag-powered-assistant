@@ -1,0 +1,10 @@
+# Everything under data/ is generated — the PDFs come from get_data.py, the index
+# from ingest.py — so it is fetched rather than committed.
+data/
+
+.venv/
+venv/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.DS_Store
