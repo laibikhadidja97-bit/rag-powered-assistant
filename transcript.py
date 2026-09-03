@@ -76,7 +76,10 @@ def main():
         f"| Generation model | `{model_label}` (backend `{args.backend}`) |",
         f"| Passages per question | k = {args.k} |",
         "",
-        "Passages marked ✅ are the ones the model cited in its answer."
+        "Passages marked ✅ are the ones the model cited in its answer. "
+        "Expand the passages and check them against the answer — that is the point "
+        "of citations, and on the small default model it does sometimes catch a "
+        "misreading (see 'Where it breaks' in the README)."
         if not args.retrieval_only else
         "Retrieval-only run: this records exactly which passages reach the prompt. "
         "Re-run without --retrieval-only to include the generated answers.",
