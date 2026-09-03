@@ -112,9 +112,13 @@ def build_ui(assistant, model_label):
 
         gr.Examples(examples=EXAMPLES, inputs=question, label="Try one of these")
 
-        for trigger in (ask.click, question.submit):
-            trigger(respond, inputs=[question, k, source],
-                    outputs=[answer_box, passages_box])
+        # api_name gives the button a stable endpoint, so the UI can be driven
+        # from a script (gradio_client) and not just by hand. The Enter-key path
+        # runs the same function and does not need a second endpoint.
+        ask.click(respond, inputs=[question, k, source],
+                  outputs=[answer_box, passages_box], api_name="ask")
+        question.submit(respond, inputs=[question, k, source],
+                        outputs=[answer_box, passages_box], api_name=False)
 
     return demo
 
@@ -132,9 +136,9 @@ def main():
     print(f"Loading generator ({args.backend} / {model_label})…")
     _ = assistant.generator
 
-    build_ui(assistant, model_label).launch(
-        server_port=args.port, share=args.share, show_api=False,
-    )
+    # Keep the launch arguments to ones that have been stable across Gradio 4-6;
+    # show_api, for instance, was removed in 6 and raises TypeError there.
+    build_ui(assistant, model_label).launch(server_port=args.port, share=args.share)
 
 
 if __name__ == "__main__":
